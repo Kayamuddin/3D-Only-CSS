@@ -1,0 +1,216 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.loading {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    width: 95px;
+    height: 95px;
+    background: linear-gradient(-45deg, red, green, blue);
+    border-radius: 50%;
+    position: absolute;
+    animation: loaderAnimation 2s infinite linear;
+}
+
+.loader::before {
+    content: "";
+    width: 70px;
+    height: 70px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+@keyframes loaderAnimation {
+    0%{
+        transform:translateY(-200px);
+    }
+    19%{transform: scaleX(1);}
+    20%{
+        transform:translateY(0px) scaleX(2);
+    }
+    40%{
+        transform:translateY(-100px);
+    }
+    50%{
+        transform:translateY(0px);
+    }
+    60%{
+        transform:translateY(-50px);
+    }
+    70%{
+        transform:translateY(0px);
+    }
+    80%{
+        transform:translateY(-25px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+.scroll {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    height: 100vh;
+}
+
+.first3dbox {
+    position: relative;
+    scroll-snap-align: start;
+    width: 100%;
+    height: 100vh;
+}
+
+.sliderBox {
+    position: absolute;
+    top: 20%;
+    left: calc(50% - 100px);
+    width: 200px;
+    height: 250px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: sliderAnimation 10s infinite linear;
+}
+
+.sliderBox div {
+    text-align: center;
+    align-content: center;
+    background-color: lightblue;
+    border-radius: 10px;
+    inset: 0;
+    position: absolute;
+    transform:
+        rotateY(calc((var(--position1) - 1) * (360/6) * 1deg)) translateZ(300px);
+}
+
+@keyframes sliderAnimation {
+    from {
+        transform: rotateX(-16deg) rotateY(360deg);
+    }
+
+    to {
+        transform: rotateX(-16deg) rotateY(0deg);
+    }
+}
+
+
+/*SECOND CUBE BOX*/
+.sec3dbox {
+    position: relative;
+    scroll-snap-align: start;
+    width: 100%;
+    height: 100vh;
+}
+
+.cubeBox {
+    position: absolute;
+    top: 30%;
+    left: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: cubeAnimation 10s infinite linear;
+}
+
+.cubeBox div {
+    position: absolute;
+    inset: 0;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    text-align: center;
+    align-content: center;
+}
+
+.cubeside {
+    transform:
+        rotateY(calc((var(--position2) - 1) * (360/4) * 1deg)) translateZ(100px);
+}
+
+.cubetopside {
+    transform:
+        rotateX(90deg) translateZ(100px);
+}
+
+.cubebottomside {
+    transform:
+        rotateX(-90deg) translateZ(100px);
+}
+
+@keyframes cubeAnimation {
+    from {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+.third3dbox {
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.mockup3d {
+    position: absolute;
+    height: 500px;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    transition: 0.7s;
+    --left: -450px;
+    display: flex;
+}
+
+.mockup3d div {
+    background:
+        var(--url) var(--left) 0,
+        url("./Images/mockup.png");
+    background-size: auto 100%;
+    width: 250px;
+    aspect-ratio: 2/4;
+    background-blend-mode: multiply;
+    mask-image: url("./Images/mockup.png");
+    mask-size: auto 100%;
+    transition: 1s;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mockup3d:hover {
+    --left: -1500px;
+    transform: translateX(-50%) translateY(-120px);
+}
+
+.mockup3d div:nth-child(2) {
+    opacity: 0;
+}
+
+.mockup3d:hover div:nth-child(2) {
+    opacity: 1;
+}
